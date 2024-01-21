@@ -1,9 +1,0 @@
-# créer la base de données des questions UMO
-# appliquer un TFIDF
-# créer le scrapper des articles juridiques.
-
-# créer un logiciel de gestion des questions umo
-
-# fonction de citation des arrêts légifrance
-# fonction de citation des articles légifrance
-

@@ -3,20 +3,20 @@
 say_hello: ## Exemple
 	@python -c 'print("hello $(NAME)");'{}
 
-split_pdf: ## Retourne le nombre de cerfas pouvant être envoyés.
+split_pdf: ## Couper un pdf.
 	@python -c 'from law_firm_toolkit.office_suites_utils.pdf_utils import split_pdf_tui; print("$(PDF_FILE)"); split_pdf_tui("$(PDF_FILE)")'
 
-del_pages_pdf:
+del_pages_pdf: ## Supprimer des pages d'un pdf.
 	@python -c 'from law_firm_toolkit.office_suites_utils.pdf_utils import delete_pages; delete_pages(src_pdf_file="$(src_file)", dst_pdf_file="$(dst_file)", pages=$(del_pages))'
 
 folder='raw_data/test_utils/stamper'
-stamp='raw_data/test_utils/stamper/tampon_boissy.png'
+stamp='data/stamp.png'
 resize_ratio='0.65'
 stamped_pages='[1]'
-stamp_pdf:
+stamp_pdf: ## Tamponner un fichier pdf.
 	@python -c 'from law_firm_toolkit import stamper; stamper.documents_lawyer_stamper(docs_folder="$(folder)", stamp="$(stamp)", resize=$(resize_ratio), stamped_pages=$(stamped_pages))'
 
-quote:
+quote:	## Creer une citation avec le presse-papier.
 	@python law_firm_toolkit/quote_maker.py
 
 help:

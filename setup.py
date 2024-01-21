@@ -1,14 +1,15 @@
 from setuptools import setup
 from setuptools import find_packages
 
-# récupérer la liste des dépendances depuis requirements.txt
+# Récupérer la liste des dépendances depuis requirements.txt
 with open('requirements.txt') as f:
     content = f.readlines()
 requirements = [line.strip() for line in content]
 
+# Installer le package.
 setup(name='law_firm_toolkit',
       version='0.1',
-      description='Tools for law firms',
+      description='Simple tools for law firms',
       url='',
       author='Alex CHAUVET',
       author_email='',

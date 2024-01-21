@@ -1,3 +1,4 @@
+
 import subprocess
 import sys
 
@@ -30,7 +31,7 @@ class QuoteMaker:
         keyboard.wait('esc')
 
         text = '\n' + '\n[...]\n'.join(self.quote_parts)
-        print(text)
+
         return text
 
 if __name__ == '__main__':

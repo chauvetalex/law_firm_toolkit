@@ -1,20 +1,26 @@
-# Script de nettoyage des données UMO brutes.
+# Script de nettoyage des mails bruts.
 
-import extract_msg
+# https://pypi.org/project/extract-msg/
+
 import pathlib
 import json
 import re
 import pandas as pd
-from slugify import slugifystamp=resize
 import unicodedata
 import sqlite3
 
-def run_pipeline():
+import extract_msg
+
+raw_mails_folder = 'data/raw_mails/'
+csv_file = 'data/emails.csv'
+database = 'data/emails.db'
+
+def run_pipeline() -> pd.DataFrame:
 
     # Extraire/lire les mails du dossier local.
     # Générer une liste de dictionnaire pour le montage d'un dataframe.
     emails = []
-    for folder in pathlib.Path('data/UMO/').glob('*'):
+    for folder in pathlib.Path(raw_mails_folder).glob('*'):
         for file in folder.glob('*.msg'):
             temp_json = json.loads(extract_msg.openMsg(file).getJson())
             temp_json['category'] = str(folder).split('/')[-1]
@@ -60,7 +66,7 @@ def run_pipeline():
 
     # Nettoyer l'objet des messages.
     df['subject'] = df['subject'].str.lower()
-    mail_marks = ['re:', 're :', 'tr:', 'fwd:', 'question umo', 'umo -']
+    mail_marks = ['re:', 're :', 'tr:', 'fwd:']
     for mark in mail_marks:
         filt = df['subject'].str.contains(mark)
         df.loc[filt, 'subject'] = df['subject'].str.replace(mark, '').str.strip(' -')
@@ -76,6 +82,7 @@ def run_pipeline():
     def get_answer(email_text):
         return split_email(email_text)[0]
     df['raw_question'].str.contains(f' city ', case=False,  regex=False)
+
     def get_raw_question(email_text):
         return split_email(email_text)[-1]
 
@@ -93,8 +100,10 @@ def run_pipeline():
     df['cc'] = df['cc'].apply(extract_email_adress)
     df['to'] = df['to'].apply(extract_email_adress)
 
-    # Exporter en csv.
-    df.to_csv('UMO_test.csv', sep='\t')
+    # Exporter le dataframe en csv.
+    df.to_csv(csv_file, sep='\t')
 
-    # Exporter en sql.
-    df.to_sql('tbl_main',con=sqlite3.connect('umo.db'))
+    # Exporter le dataframe en base de données sqlite.
+    df.to_sql('tbl_main',con=sqlite3.connect(database))
+
+    return df

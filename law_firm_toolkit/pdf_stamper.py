@@ -252,10 +252,8 @@ def documents_lawyer_stamper(
 
 if __name__ == '__main__':
 
-    # /home/alex/projects/law_firm_toolkit/raw_data/test_utils/stamper/
-
     docs_folder = 'raw_data/test_utils/stamper'
-    stamp = 'raw_data/test_utils/stamper/tampon_boissy.png'
+    stamp = 'path/to/stamp.png'
     stamped_pages='all'
 
     documents_lawyer_stamper(

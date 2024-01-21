@@ -2,7 +2,7 @@ import subprocess
 import tkinter.messagebox, tkinter.simpledialog
 
 
-# récupérer le focus placé sur l'url.        # Vider le presse papier de xsel.
+# Récupérer le focus placé sur l'url.        # Vider le presse papier de xsel.
 subprocess.run('xsel -cb', shell=True)
 
 # input('Select url')
@@ -21,9 +21,9 @@ title = subprocess.check_output(
 # demander à l'utilisateur la partie de texte qu'il veut conserver (boucle si plusieurs paragraphe discontinus)
 text_parts = []
 while True:
+    # ipt = input('Select text parts. Type n if not parts').strip().lower()
     # tkinter.messagebox.showinfo(message='Select text parts. Type n if not parts')
     ipt = tkinter.messagebox.askokcancel(title=None, message='Select text parts. Type n if not parts')
-    # ipt = input('Select text parts. Type n if not parts').strip().lower()
     if ipt is False:
         break
     text_parts.append(
@@ -31,7 +31,7 @@ while True:
         "xsel", universal_newlines=True).strip().replace('\n', ' ')
     )
 
-# générer un json avec les informations utiles.
+# générer un dict avec les informations utiles.
 print({
     'url':url,
     'title':title,

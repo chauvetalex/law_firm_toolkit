@@ -1,4 +1,7 @@
 # Ignorer les dossiers suivants
-/temp
-/notebooks
-/raw_data
+*/temp
+*/notebooks
+*/data
+TODO.txt
+*/__pycache__/*
+*.pyc
