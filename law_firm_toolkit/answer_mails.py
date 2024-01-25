@@ -1,5 +1,5 @@
 # Le module définit des fonctions utiles pour la manipulation de courts mails standards de réponse.
-# Les fonctions reposentsur un template html.
+# Les fonctions reposent sur un template html.
 
 import re
 from lxml import etree

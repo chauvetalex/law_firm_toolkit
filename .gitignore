@@ -5,3 +5,5 @@
 TODO.txt
 */__pycache__/*
 *.pyc
+*.ipynb
+.gitignore

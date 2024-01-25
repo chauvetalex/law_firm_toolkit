@@ -77,25 +77,25 @@ def generate_indexed_stamp(
     # Modifier le tampon de base.
     with Image.open(base_stamp).convert("RGBA") as base:
 
-        # make a blank image for the text, initialized to transparent text color
+        # Créer une image vide pour le texte, initialisée avec du texte transparent.
         txt = Image.new("RGBA", base.size, (255, 255, 255, 0))
 
-        # get a font
+        # Choisir une police d'écriture.
         fnt = ImageFont.truetype("Pillow/Tests/fonts/FreeMono.ttf", round(txt.height/3))
 
-        # get a drawing context
+        # Créer un contexte de dessin.
         d = ImageDraw.Draw(txt)
 
-        # draw text, full opacity
+        # Dessiner le texte avec opacité maximale.
         d.text((txt.width/2, txt.height/2+100), str(index), font=fnt, fill=color_opacity)
 
         # Recomposer une image avec le tampon de base et le texte.
         out = Image.alpha_composite(base, txt)
 
-        # Load image and extract alpha channel
+        # Charger l'image et extraire la canal alpha.
         current_alpha = out.getchannel('A')
 
-        # Make all opaque pixels into semi-opaque
+        # Diminuer l'opacité de l'image de moitié.
         new_alpha = current_alpha.point(lambda i: 128 if i>0 else 0)
         out.putalpha(new_alpha)
 
