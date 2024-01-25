@@ -1,9 +1,10 @@
 # Ignorer les dossiers suivants
 */temp
 */notebooks
-*/data
+*/data/*
 TODO.txt
 */__pycache__/*
 *.pyc
 *.ipynb
 .gitignore
+*/.envrc
